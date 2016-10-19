@@ -1,32 +1,16 @@
-<ul class="errors">
- <% @user.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-  <% end %>
-</ul>
+<h1>Login</h1>
 
-<h1>Sign Up</h1>
-
-<form action="/signup" method="POST">
- <div class="form-group">
- 	<label for="email">Email</label>
- 	<input type="email" id="email" name="email" value="<%= @user.email %>">
- </div>
- <div class="form-group">
- 	<label for="avatar_url">Avatar URL</label>
- 	<input type="text" id="avatar_url" name="avatar_url" value="<%= @user.avatar_url %>">
- </div>
+<form action="/login" method="POST">
  <div class="form-group">
  	<label for="username">Username</label>
- 	<input type="text" id="username" name="username" value="<%= @user.username %>">
+ 	<input type="text" id="username" name="username">
  </div>
   <div class="form-group">
  	<label for="password">Password</label>
  	<input type="password" id="password" name="password">
  </div>
  <div class="form-group">
- 	<label for="Submit">Password</label>
- 	<button class="button" type="submit">Signup</button>
+ 	<button class="button" type="submit">Login</button>
  </div>
 </form>
-
 

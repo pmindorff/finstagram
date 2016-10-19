@@ -49,7 +49,7 @@ end
 
 get '/signup' do
   @user = User.new
-  erb(:signup)
+erb(:signup)
 end
 
 post '/signup' do
@@ -61,25 +61,13 @@ post '/signup' do
   @user = User.new({email: email, avatar_url: avatar_url,username: username, password: password})
   
     if @user.save
-     # "Ccongrats! you have signed up."
-    username = params[:username]
-    password = params[:password]  
-  
-    user = User.find_by(username: username)
-  
-    if user && user.password == password
-      session[:user_id] = user.id
-       #   "Success! User with id #{session[:user_id]} is logged in!"
-       @posts = Post.order(created_at: :desc)
-       erb(:index)
-     end
+      "Ccongrats! you have signed up."
     else
       erb(:signup)
     end
 end
 
 get '/posts/new' do
-  @post = Post.new
   erb(:"posts/new")
 end
 
@@ -87,21 +75,16 @@ post '/posts' do
   photo_url = params[:photo_url]
   
   # instantiate new Post
-  @post = Post.new({photo_url: photo_url, user_id: current_user.id})
+  @post = Post.new({photo_url: photo_url})
   
   # if @post validates, save
   if @post.save
     redirect(to('/'))
   else
     # if it doesnt validate, print error message
-    # @post.errors.full_messages.inspect
-    erb(:"posts/new")
+    @post.errors.full_messages.inspect
   end
 end
 
-get '/posts/:id' do
-  @post = Post.find(params[:id])
-  erb(:"posts/show")
-end
-
+  
   
